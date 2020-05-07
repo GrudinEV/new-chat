@@ -12,7 +12,7 @@ public class OutputMessageHandler {
     }
 
     public void userAdded(String userName) throws IOException {
-        for (ConcurrentHashMap.Entry<String, Connection> pair : Server.getMapConnection().entrySet()) {
+        for (ConcurrentHashMap.Entry<String, ConnectionServer> pair : Server.getMapConnection().entrySet()) {
             if (pair.getKey().equals(userName)) {
                 Message userAdded = new Message(MessageType.USER_ADDED, "Добро пожаловать в чат!");
                 out.writeObject(userAdded);

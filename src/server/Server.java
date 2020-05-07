@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class Server {
     private static boolean serverConnected;
-    private static ConcurrentMap<String, Connection> mapConnection = new ConcurrentHashMap<>();
+    private static ConcurrentMap<String, ConnectionServer> mapConnection = new ConcurrentHashMap<>();
 
     protected static boolean isServerConnected() {
         return serverConnected;
@@ -18,11 +18,11 @@ public class Server {
         Server.serverConnected = serverConnected;
     }
 
-    public static ConcurrentMap<String, Connection> getMapConnection() {
+    public static ConcurrentMap<String, ConnectionServer> getMapConnection() {
         return mapConnection;
     }
 
-    public static void addConnection(String userName, Connection connection) {
+    public static void addConnection(String userName, ConnectionServer connection) {
         mapConnection.put(userName, connection);
     }
     public static void remove(String userName) {
@@ -57,7 +57,7 @@ public class Server {
         while (serverConnected) {
             try {
                 Socket socket = serverSocket.accept();
-                new Connection(socket).start();
+                new ConnectionServer(socket).start();
                 ConsoleHandler.writeString("Создано новое подключение:" + socket.getRemoteSocketAddress());
             } catch (IOException e) {
                 ConsoleHandler.writeString("Произошла ошибка ввода-вывода при создании подключения");

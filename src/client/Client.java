@@ -28,13 +28,17 @@ public class Client {
                 }
             }
             try {
-                Socket socket = new Socket(serverAddress, port);
+                socket = new Socket(serverAddress, port);
                 b1 = false;
             } catch (IOException e) {
                 ConsoleHandler.writeString("Не удалось создать подключение к серверу. Попробуйте ещё раз.");
             }
         }
         ConsoleHandler.writeString("Подключение выполнено!");
-        new ThreadSocket(socket).start();
+        try {
+			new ThreadSocket(socket).start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }
