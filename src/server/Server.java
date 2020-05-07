@@ -29,6 +29,9 @@ public class Server {
         mapConnection.remove(userName);
     }
 
+    /*Основной метод.
+    * 1. Создаёт сервер с указанным портом.
+    * 2. Создаёт удалённое socket подключение (объект класса Connection).*/
     public static void main(String[] args) {
         final int portMin = 1_500;
         final int portMax = 60_000;
